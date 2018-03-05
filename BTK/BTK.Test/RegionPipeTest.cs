@@ -32,7 +32,7 @@ namespace BTK.Test
         }
 
         [TestMethod]
-        public void Return_Value_Is_Different_Object_Than_Input()
+        public void Return_Value_Is_Same_Object_Than_Input()
         {
             Region region = new Region((object obj) =>
             {
@@ -46,7 +46,7 @@ namespace BTK.Test
 
             object result = target.Run(inputObj);
 
-            Assert.AreNotSame(result, inputObj, "The RegionPipe Run method returned the same object(reference) as the input");
+            Assert.AreSame(result, inputObj, "The RegionPipe Run method did not return the same object(reference) as the input");
         }
 
         [TestMethod]

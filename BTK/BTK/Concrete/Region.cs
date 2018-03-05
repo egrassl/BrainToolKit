@@ -49,18 +49,9 @@ namespace BTK
             {
                 throw new NotImplementedException("The ProcessFunction delegate must be implemented!");
             }
-            object newInput;
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(ms, input);
-                ms.Position = 0;
-                newInput = formatter.Deserialize(ms);
-            }
-
             PreProcessAction?.Invoke();
             DateTime initialTime = DateTime.Now;
-            _result = ProcessFunction(newInput);
+            _result = ProcessFunction(input);
             DateTime endingTime = DateTime.Now;
             _elapsedTime = endingTime - initialTime;
             PostProcessAction?.Invoke();
